@@ -13,11 +13,17 @@ public enum AppState
 public class Slides : MonoBehaviour
 {
     [SerializeField] float time_until_confirmation = 1.0f;
+    [SerializeField] float time_until_instance_creation = 1.5f;
     [SerializeField] float slide_speed = 1;
+
     [SerializeField] RectTransform load_screen;
     [SerializeField] RectTransform call_screen;
     [SerializeField] RectTransform slider_screen;
     [SerializeField] RectTransform screen_group;
+
+    [SerializeField] Text results_text;
+    [SerializeField] GameObject circle_obj;
+    [SerializeField] GameObject tick_obj;
 
     [SerializeField] GameObject accept_button_up;
     [SerializeField] GameObject accept_button_dn;
@@ -80,9 +86,13 @@ public class Slides : MonoBehaviour
     IEnumerator TransitionToResults()
     {
         sliding = true;
-        yield return new WaitUntil(() => target_y - screen_group.localPosition.y  >= 0.5f);
+        yield return new WaitUntil(() => screen_group.localPosition.y >= Screen.height - 1);
+
+        Debug.Log("results");
         sliding = false;
         state = AppState.RESULTS;
+
+        Invoke("InstanceCreated", time_until_instance_creation);
     }
 
 
@@ -113,6 +123,15 @@ public class Slides : MonoBehaviour
     void ResultsState()
     {
         // Something ..
+    }
+
+
+    void InstanceCreated()
+    {
+        results_text.text = "Instance Created";
+
+        circle_obj.SetActive(false);
+        tick_obj.SetActive(true);
     }
 
 }
