@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ebb8baa0c5051e74b8502ed0510241c6
+timeCreated: 1516893468
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Forza
+  fontNames:
+  - Forza
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
