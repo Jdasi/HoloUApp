@@ -13,6 +13,7 @@ public enum AppState
 public class Slides : MonoBehaviour
 {
     [SerializeField] float time_until_confirmation = 1.0f;
+    [SerializeField] float slide_speed = 1;
     [SerializeField] RectTransform load_screen;
     [SerializeField] RectTransform call_screen;
     [SerializeField] RectTransform slider_screen;
@@ -26,13 +27,13 @@ public class Slides : MonoBehaviour
     bool sliding;
     float height;
     float target_y;
+    Vector2 original_pos;
 
 
     void Start()
     {
-        height = load_screen.rect.height;
-        target_y = load_screen.localPosition.y;
-
+        target_y = load_screen.localPosition.y + height;
+        original_pos = screen_group.localPosition;
         load_screen.gameObject.SetActive(true);
         StartCoroutine(TransitionToConfirmation());
     }
@@ -50,6 +51,11 @@ public class Slides : MonoBehaviour
             case AppState.CONFIRMATION:
             {
                 ConfirmationState();
+                if (sliding)
+                {
+                    screen_group.localPosition = Vector2.Lerp(screen_group.localPosition,
+                        new Vector2(0, Screen.height), Time.deltaTime * slide_speed);
+                }
             } break;
 
             case AppState.RESULTS:
@@ -73,11 +79,10 @@ public class Slides : MonoBehaviour
 
     IEnumerator TransitionToResults()
     {
-
-
-
-
-        yield break;
+        sliding = true;
+        yield return new WaitUntil(() => target_y - screen_group.localPosition.y  >= 0.5f);
+        sliding = false;
+        state = AppState.RESULTS;
     }
 
 

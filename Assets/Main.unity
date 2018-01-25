@@ -564,7 +564,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6e4a8618539934eab576e6e06c2e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time_until_confirmation: 1
+  time_until_confirmation: 2
+  slide_speed: 4
   load_screen: {fileID: 1330309405}
   call_screen: {fileID: 46256122}
   slider_screen: {fileID: 603030459}
@@ -1430,7 +1431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7131838b73ad3114e91a5ca78e5bb456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotation_speed: -50
+  rotation_speed: -200
   rotation_axis: {x: 0, y: 0, z: 1}
 --- !u!1 &2093459622
 GameObject:
