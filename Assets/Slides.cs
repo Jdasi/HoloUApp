@@ -16,13 +16,24 @@ public class Slides : MonoBehaviour
     [SerializeField] RectTransform load_screen;
     [SerializeField] RectTransform call_screen;
     [SerializeField] RectTransform slider_screen;
+    [SerializeField] RectTransform screen_group;
 
+    [SerializeField] GameObject accept_button_up;
+    [SerializeField] GameObject accept_button_dn;
 
     AppState state = AppState.LOADING;
+
+    bool sliding;
+    float height;
+    float target_y;
 
 
     void Start()
     {
+        height = load_screen.rect.height;
+        target_y = load_screen.localPosition.y;
+
+        load_screen.gameObject.SetActive(true);
         StartCoroutine(TransitionToConfirmation());
     }
 
@@ -33,17 +44,17 @@ public class Slides : MonoBehaviour
         {
             case AppState.LOADING:
             {
-
+                LoadingState();
             } break;
 
             case AppState.CONFIRMATION:
             {
-
+                ConfirmationState();
             } break;
 
             case AppState.RESULTS:
             {
-
+                ResultsState();
             } break;
         }
     }
@@ -53,16 +64,18 @@ public class Slides : MonoBehaviour
     {
         yield return new WaitForSeconds(time_until_confirmation);
 
-        // Hide loading screen stuff.
+        load_screen.gameObject.SetActive(false);
+        call_screen.gameObject.SetActive(true);
 
         state = AppState.CONFIRMATION;
-
-        // Show confirmation screen stuff.
     }
 
 
     IEnumerator TransitionToResults()
     {
+
+
+
 
         yield break;
     }
@@ -78,12 +91,14 @@ public class Slides : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // Change sprite: Push accept button down.
+            accept_button_up.SetActive(false);
+            accept_button_dn.SetActive(true);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            // Change sprite: Lift accept button up.
+            accept_button_up.SetActive(true);
+            accept_button_dn.SetActive(false);
 
             StartCoroutine(TransitionToResults());
         }
