@@ -13,6 +13,10 @@ public enum AppState
 public class Slides : MonoBehaviour
 {
     [SerializeField] float time_until_confirmation = 1.0f;
+    [SerializeField] RectTransform load_screen;
+    [SerializeField] RectTransform call_screen;
+    [SerializeField] RectTransform slider_screen;
+
 
     AppState state = AppState.LOADING;
 
