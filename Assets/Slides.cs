@@ -60,7 +60,7 @@ public class Slides : MonoBehaviour
                 if (sliding)
                 {
                     screen_group.localPosition = Vector2.Lerp(screen_group.localPosition,
-                        new Vector2(0, Screen.height), Time.deltaTime * slide_speed);
+                        new Vector2(0, Screen.height * 1.5f), Time.deltaTime * slide_speed);
                 }
             } break;
 
@@ -86,7 +86,7 @@ public class Slides : MonoBehaviour
     IEnumerator TransitionToResults()
     {
         sliding = true;
-        yield return new WaitUntil(() => screen_group.localPosition.y >= Screen.height - 1);
+        yield return new WaitUntil(() => screen_group.localPosition.y >= (Screen.height * 1.5f) - 1);
 
         Debug.Log("results");
         sliding = false;
